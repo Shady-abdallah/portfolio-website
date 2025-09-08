@@ -8,18 +8,18 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; margin-top: 50px }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; margin-top: 50px;}
     header { background: #004466; color: #fff; text-align: center; padding: 2rem; }
     header h1 { margin: 0; font-size: 2rem; }
     header p { font-size: 1.2rem; margin: 0.5rem 0; }
-    nav {  background: #003355;
+    nav { background: #003355;
           padding: 1rem;
           text-align: center;
-          position: fixed;     
-          top: 0;             
+          position: fixed;     /* ✅ يجعل الشريط ثابت */
+          top: 0;              /* يثبته في أعلى الصفحة */
           left: 0;
-          width: 100%;         
-          z-index: 1000;    }
+          width: 100%;         /* يمتد بعرض الصفحة */
+          z-index: 1000;     }
     nav a { color: #fff; margin: 0 1rem; text-decoration: none; font-weight: bold; }
     section { padding: 2rem; max-width: 900px; margin: auto; }
     .portfolio-item { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin: 1rem 0; background: #fff; }
@@ -58,6 +58,77 @@
 .portfolio-item a:hover h3 {
   color: #ff6600; /* يغير لون العنوان عند المرور */
 }
+.footer-icons {
+  display: flex;
+  
+  gap: 25px;                /* مسافة بين الأيقونات */
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.footer-icons a {
+  color: #004466;           /* لون الأيقونات */
+  font-size: 2.2rem;        /* ✅ تكبير حجم الأيقونة */
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+.footer-icons a:hover { transform: scale(1.2);
+  color: #ff6600;           /* لون عند مرور الماوس */
+}
+.footer-icons a[aria-label="LinkedIn"] i {
+  color: #0077b5; /* أزرق LinkedIn */
+}
+
+.footer-icons a[aria-label="GitHub"] i {
+  color: #333; /* رمادي GitHub */
+}
+
+.footer-icons a[aria-label="WhatsApp"] i {
+  color: #25D366; /* أخضر WhatsApp */
+}
+
+.footer-icons a[aria-label="Gmail"] i {
+  color: #EA4335; /* أحمر Gmail */
+}
+.whatsapp-float{
+  position: fixed;
+  left: 40px;
+  bottom: 100px;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #25d366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 28px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  z-index: 1200;
+}
+.whatsapp-float:hover { transform: translateY(-3px); transition: .15s; }
+
+/* notification badge */
+.whatsapp-notif{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 12px;
+  background: #ff3b30;
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
 
   </style>
 </head>
@@ -85,7 +156,7 @@
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
     <a href="resume.pdf" target="_blank"> Resume </a>
-    <a href="index-ar.html">العربية</a>
+    <a href="index-ar.html">العربية</a>  
   </nav>
 
   <section id="about">
@@ -145,8 +216,8 @@
 </section>
 
  <section id="contact">
-     <h2>Contact Me</h2>
-  <div style="max-width: 600px; margin: 2rem auto; background: #fff; border: 1px solid #ddd; border-radius: 16px; padding: 2.5rem; box-shadow: 0 6px 18px rgba(0,0,0,0.1);">
+    <h2>Contact Me</h2>
+      <div style="max-width: 600px; margin: 2rem auto; background: #fff; border: 1px solid #ddd; border-radius: 16px; padding: 2.5rem; box-shadow: 0 6px 18px rgba(0,0,0,0.1);">
     
     <h2 style="text-align:center; color:#004466; margin-bottom: 1rem; font-size:1.8rem;">Send me a message</h2>
     <p style="text-align:center; margin-bottom: 2rem; font-size:1.1rem; color:#555;">I'd love to hear from you! Fill in the form below and I'll get back to you as soon as possible.</p>
@@ -172,22 +243,31 @@
   </div>
 
     <p>Or reach me on:</p>
-    <ul>
-      <li><a href="https://www.linkedin.com/in/shady-abdallah-658425297">LinkedIn</a></li>
-      <li><a href="https://github.com/shady-abdallah">GitHub</a></li>
-      <li><a href="https://wa.me/+201227273603" target="_blank">WhatsApp</a></li>
-    </ul>
+<div class="footer-icons">
+  <a href="https://www.linkedin.com/in/shady-abdallah-658425297" target="_blank" aria-label="LinkedIn">
+    <i class="fab fa-linkedin"></i>
+  </a>
+  <a href="https://github.com/shady-abdallah" target="_blank" aria-label="GitHub">
+    <i class="fab fa-github"></i>
+  </a>
+  <a href="https://wa.me/+201227273603" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <a href="mailto:Shadyabdallah05@gmail.com" target="_blank" aria-label="Gmail">
+  <i class="fas fa-envelope"></i>
+</a>
+</div>
+
   </section>
 
   <footer>
     <p>© 2025 All Rights Reserved</p>
   </footer>
+
+    <!-- Floating WhatsApp button -->
+<a href="https://wa.me/+201227273603" target="_blank" class="whatsapp-float" aria-label="Open WhatsApp chat">
+  <i class="fab fa-whatsapp"></i>
+  <span class="whatsapp-notif" aria-hidden="true">1</span>
+</a>
 </body>
 </html>
-
-
-
-
-
-
-
