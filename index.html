@@ -7,301 +7,951 @@
   <link rel="icon" type="image/png" href="profile.jpg">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; margin-top: 50px;}
-    header { background: #004466; color: #fff; text-align: center; padding: 2rem; }
-    header h1 { margin: 0; font-size: 2rem; }
-    header p { font-size: 1.2rem; margin: 0.5rem 0; }
-    nav { background: #003355;
-          padding: 1rem;
-          text-align: center;
-          position: fixed;     /* ✅ يجعل الشريط ثابت */
-          top: 0;              /* يثبته في أعلى الصفحة */
-          left: 0;
-          width: 100%;         /* يمتد بعرض الصفحة */
-          z-index: 1000;     }
-    nav a { color: #fff; margin: 0 1rem; text-decoration: none; font-weight: bold; }
-    section { padding: 2rem; max-width: 900px; margin: auto; }
-    .portfolio-item { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin: 1rem 0; background: #fff; }
-    .portfolio-item img { max-width: 100%; border-radius: 8px; }
-    footer { text-align: center; background: #004466; color: #fff; padding: 1rem; margin-top: 2rem; }
-    .profile-pic { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin: 1rem auto; display: block; }
-    .cta { display: inline-block; background: #ff6600; color: #fff; padding: 0.8rem 1.5rem; border-radius: 8px; margin-top: 1rem; text-decoration: none; }
-    
-    /* ==== Social Icons ==== */
-    .social-icons {
-      margin: 1rem 0;
+    /* ===== Enhanced CSS Variables ===== */
+    :root {
+      --primary-color: #004466;
+      --secondary-color: #ff6600;
+      --accent-color: #006699;
+      --text-light: #f0f8ff;
+      --text-dark: #333;
+      --bg-light: #f9f9f9;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-light: 0 4px 20px rgba(0, 68, 102, 0.1);
+      --shadow-hover: 0 8px 30px rgba(0, 68, 102, 0.15);
     }
+
+    /* ===== Base Styles with Enhanced Typography ===== */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: var(--bg-light); 
+      color: var(--text-dark); 
+      margin-top: 50px;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* ===== Enhanced Header with Gradient Animation ===== */
+    header { 
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); 
+      color: #fff; 
+      text-align: center; 
+      padding: 4rem 2rem; 
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    header h1 { 
+      margin: 0; 
+      font-size: 3rem; 
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    header p { 
+      font-size: 1.3rem; 
+      margin: 1rem 0; 
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Enhanced Navigation ===== */
+    nav { 
+      background: var(--primary-color);
+      padding: 1rem;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      box-shadow: var(--shadow-light);
+    }
+
+    nav.scrolled {
+      background: rgba(0, 68, 102, 0.95);
+      padding: 0.8rem;
+    }
+
+    nav a { 
+      color: #fff; 
+      margin: 0 1.2rem; 
+      text-decoration: none; 
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--secondary-color);
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      color: var(--secondary-color);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ===== Enhanced Section Styles ===== */
+    section { 
+      padding: 4rem 2rem; 
+      max-width: 900px; 
+      margin: auto; 
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--secondary-color);
+      border-radius: 2px;
+    }
+
+    /* ===== Enhanced Portfolio Items ===== */
+    .portfolio-item { 
+      border: 1px solid #ddd; 
+      border-radius: 16px; 
+      padding: 2rem; 
+      margin: 2rem 0; 
+      background: #fff;
+      transition: var(--transition);
+      box-shadow: var(--shadow-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    .portfolio-item:hover::before {
+      left: 100%;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .portfolio-item img { 
+      max-width: 100%; 
+      border-radius: 12px;
+      transition: var(--transition);
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .portfolio-item h3 {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      transition: var(--transition);
+    }
+
+    .portfolio-item:hover h3 {
+      color: var(--secondary-color);
+    }
+
+    /* ===== Enhanced Profile Picture ===== */
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: auto;
+      border: 5px solid rgba(255,255,255,0.3);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease !important;
+      transform: scale(1); /* مهم جداً */
+  }
+
+
+
+    .profile-pic:hover {
+      transform: scale(1.2) rotate(3deg) !important;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+  }
+
+
+
+    /* ===== Enhanced CTA Button ===== */
+    .cta { 
+      display: inline-block; 
+      background: var(--secondary-color); 
+      color: #fff; 
+      padding: 1rem 2rem; 
+      border-radius: 50px; 
+      margin-top: 1.5rem; 
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+      z-index: -1;
+    }
+
+    .cta:hover::before {
+      left: 100%;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255,102,0,0.4);
+    }
+
+    /* ===== Enhanced Social Icons ===== */
+    .social-icons {
+      margin: 2rem 0;
+    }
+
     .social-icons a {
       color: #fff;
-      margin: 0 10px;
-      font-size: 1.8rem;
+      margin: 0 15px;
+      font-size: 2.2rem;
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: var(--transition);
+      display: inline-block;
     }
+
     .social-icons a:hover {
-      color: #ff6600;
+      color: var(--secondary-color);
+      transform: translateY(-5px) scale(1.2);
     }
-    .portfolio-item a img {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* ===== Enhanced Footer Icons ===== */
+    .footer-icons {
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .footer-icons a {
+      color: var(--primary-color);
+      font-size: 2.5rem;
+      text-decoration: none;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .footer-icons a:hover {
+      transform: scale(1.3) rotate(360deg);
+    }
+
+    .footer-icons a[aria-label="LinkedIn"] i {
+      color: #0077b5;
+    }
+
+    .footer-icons a[aria-label="GitHub"] i {
+      color: #333;
+    }
+
+    .footer-icons a[aria-label="WhatsApp"] i {
+      color: #25D366;
+    }
+
+    .footer-icons a[aria-label="Gmail"] i {
+      color: #EA4335;
+    }
+
+    /* ===== Enhanced WhatsApp Float ===== */
+    .whatsapp-float{
+      position: fixed;
+      left: 40px;
+      bottom: 100px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 32px;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      z-index: 1200;
+      transition: var(--transition);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .whatsapp-float:hover { 
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+    }
+
+    .whatsapp-notif{
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      min-width: 22px;
+      height: 22px;
+      padding: 0 6px;
+      border-radius: 12px;
+      background: #ff3b30;
+      color: #fff;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    /* ===== Enhanced Skill Boxes ===== */
+    .skill-box {
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,102,153,0.1) 0%, transparent 70%);
+      transform: rotate(45deg);
+      transition: var(--transition);
+    }
+
+    .skill-box:hover::before {
+      transform: rotate(45deg) translate(50%, 50%);
+    }
+
+    .skill-box:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* ===== Custom CSS Animations ===== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* ===== Animation Classes ===== */
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .animate-fade-in-left {
+      animation: fadeInLeft 0.8s ease-out;
+    }
+
+    .animate-fade-in-right {
+      animation: fadeInRight 0.8s ease-out;
+    }
+
+    .animate-scale-in {
+      animation: scaleIn 0.6s ease-out;
+    }
+
+    /* ===== Responsive Design ===== */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      header p { font-size: 1.1rem; }
+      nav a { margin: 0 0.5rem; font-size: 0.9rem; }
+      .profile-pic { width: 120px; height: 120px; }
+      .whatsapp-float { left: 20px; bottom: 80px; width: 60px; height: 60px; }
+    }
+
+    /* ===== Loading Animation ===== */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--primary-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top: 3px solid var(--secondary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ===== Enhanced Form Styles ===== */
+    input, textarea {
+      transition: var(--transition);
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 3px rgba(255,102,0,0.1);
+    }
+
+    button {
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255,102,0,0.4);
+    }
+    .hero {
+    position: relative !important;
+    top: 0 !important;
+    margin: 0 !important;
+    padding-top: 0 !important;
+    transform: none !important;
+}
+/* Lightbox Popup */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    animation: fadeIn 0.3s ease;
 }
 
-.portfolio-item a:hover img {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+.lightbox-img {
+    max-width: 85%;
+    max-height: 85%;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.2);
+    animation: zoomIn 0.3s ease;
 }
 
-.portfolio-item a h3 {
-  transition: color 0.3s ease;
+/* زر الإغلاق */
+.close-btn {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    font-size: 45px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
-.portfolio-item a:hover h3 {
-  color: #ff6600; /* يغير لون العنوان عند المرور */
-}
-.footer-icons {
-  display: flex;
-  
-  gap: 25px;                /* مسافة بين الأيقونات */
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
+.close-btn:hover {
+    color: #ff4444;
+    transform: scale(1.2);
 }
 
-.footer-icons a {
-  color: #004466;           /* لون الأيقونات */
-  font-size: 2.2rem;        /* ✅ تكبير حجم الأيقونة */
-  text-decoration: none;
-  transition: color 0.25s;
+/* الأنيميشن */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-.footer-icons a:hover { transform: scale(1.2);
-  color: #ff6600;           /* لون عند مرور الماوس */
-}
-.footer-icons a[aria-label="LinkedIn"] i {
-  color: #0077b5; /* أزرق LinkedIn */
+@keyframes zoomIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
-.footer-icons a[aria-label="GitHub"] i {
-  color: #333; /* رمادي GitHub */
-}
-
-.footer-icons a[aria-label="WhatsApp"] i {
-  color: #25D366; /* أخضر WhatsApp */
-}
-
-.footer-icons a[aria-label="Gmail"] i {
-  color: #EA4335; /* أحمر Gmail */
-}
-.whatsapp-float{
-  position: fixed;
-  left: 40px;
-  bottom: 100px;
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  background: #25d366;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 28px;
-  text-decoration: none;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-  z-index: 1200;
-}
-.whatsapp-float:hover { transform: translateY(-3px); transition: .15s; }
-
-/* notification badge */
-.whatsapp-notif{
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 4px;
-  border-radius: 12px;
-  background: #ff3b30;
-  color: #fff;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-}
 
   </style>
 </head>
 <body>
-  <header>
-    <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
-    <h1>Hello, I'm Shady Abdallah </h1>
-    <p style="font-size: 30px; line-height: 1.6;">I'm a Data Analyst</p>
-    <p>I turn data into insights that drive decisions</p>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+  </div>
 
-    <!-- ✅ Social Media Icons -->
-    <div class="social-icons">
-      <a href="https://github.com/shady-abdallah" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/shady-abdallah05" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="https://wa.me/+201227273603" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      <a href="mailto:Shadyabdallah05@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+  <header data-aos="fade-down">
+    <img src="profile.jpg" alt="Profile Picture" class="profile-pic" id="profilePic">
+    <h1 data-aos="fade-up" data-aos-delay="400">Hello, I'm Shady Abdallah</h1>
+    <p style="font-size: 30px; line-height: 1.6;" data-aos="fade-up" data-aos-delay="600">I'm a Data Analyst</p>
+    <p data-aos="fade-up" data-aos-delay="800">I turn data into insights that drive decisions</p>
+
+    <!-- Enhanced Social Media Icons -->
+    <div class="social-icons" data-aos="fade-up" data-aos-delay="1000">
+      <a href="https://github.com/shady-abdallah" target="_blank" data-aos="zoom-in" data-aos-delay="1200"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/shady-abdallah05" target="_blank" data-aos="zoom-in" data-aos-delay="1400"><i class="fab fa-linkedin"></i></a>
+      <a href="https://wa.me/+201227273603" target="_blank" data-aos="zoom-in" data-aos-delay="1600"><i class="fab fa-whatsapp"></i></a>
+      <a href="mailto:Shadyabdallah05@gmail.com" target="_blank" data-aos="zoom-in" data-aos-delay="1800"><i class="fas fa-envelope"></i></a>
     </div>
 
-    <a href="#portfolio" class="cta">View My Work</a>
+    <a href="#portfolio" class="cta" data-aos="fade-up" data-aos-delay="2000">View My Work</a>
   </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#portfolio">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-    <a href="resume.pdf" target="_blank"> Resume </a>
-    <a href="index-ar.html">العربية</a>  
+  <nav id="navbar">
+    <a href="#about" data-aos="fade-down" data-aos-delay="2200">About</a>
+    <a href="#education" data-aos="fade-down" data-aos-delay="2400">Education</a>
+    <a href="#portfolio" data-aos="fade-down" data-aos-delay="2600">Projects</a>
+    <a href="#skills" data-aos="fade-down" data-aos-delay="2800">Skills</a>
+    <a href="#contact" data-aos="fade-down" data-aos-delay="3000">Contact</a>
+    <a href="resume.pdf" target="_blank" data-aos="fade-down" data-aos-delay="3200">CV</a>
+    <a href="index-ar.html" data-aos="fade-down" data-aos-delay="3400">العربية</a>  
   </nav>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I’m Shady Abdallah, a Data Analyst who enjoys simplifying complex datasets and turning them into meaningful business value. With hands-on experience in SQL, Python, Power BI and Data Cleaning, I provide data-driven solutions that help organizations improve performance and achieve measurable results. From building custom dashboards and tracking KPIs to uncovering patterns and solving strategic challenges, I focus on transforming raw information into practical insights that support sustainable growth. I believe every dataset has a story to tell, my mission is to help you discover it.</p>
+  <section id="about" data-aos="fade-up">
+    <h2 data-aos="fade-right">About Me</h2>
+    <p data-aos="fade-left" data-aos-delay="200">I'm Shady Abdallah, a Data Analyst who enjoys simplifying complex datasets and turning them into meaningful business value. With hands-on experience in SQL, Python, Power BI and Data Cleaning, I provide data-driven solutions that help organizations improve performance and achieve measurable results. From building custom dashboards and tracking KPIs to uncovering patterns and solving strategic challenges, I focus on transforming raw information into practical insights that support sustainable growth. I believe every dataset has a story to tell, my mission is to help you discover it.</p>
   </section>
 
-  <section id="education">
-  <h2 style="text-align:center; margin-bottom: 1.5rem;">Education</h2>
-  <div style="max-width: 800px; margin: auto; display: flex; flex-direction: column; gap: 1.5rem;">
+  <section id="education" data-aos="fade-up">
+    <h2 style="text-align:center; margin-bottom: 1.5rem;" data-aos="fade-down">Education</h2>
+    <div style="max-width: 800px; margin: auto; display: flex; flex-direction: column; gap: 1.5rem;">
 
-    <!-- Degree 1 -->
-    <div style="background:#fff; border:1px solid #ddd; border-radius: 12px; padding:1.5rem; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
-  <h3 style="color:#004466; margin-bottom:0.5rem;">Bachelor of Science in Statistics</h3>
-  <p style="margin:0; font-size:1.1rem; color:#555;">Faculty of Science – Tanta University</p>
-  <p style="margin-top:0.5rem;">2017 – 2021</p>
-</div>
+      <!-- Degree 1 -->
+      <div style="background:#fff; border:1px solid #ddd; border-radius: 12px; padding:1.5rem; box-shadow:0 4px 10px rgba(0,0,0,0.1);" data-aos="fade-right">
+        <h3 style="color:#004466; margin-bottom:0.5rem;">Bachelor of Science in Statistics</h3>
+        <p style="margin:0; font-size:1.1rem; color:#555;">Faculty of Science – Tanta University</p>
+        <p style="margin-top:0.5rem;">2017 – 2021</p>
+      </div>
 
-
-    <!-- Degree 2 -->
-    <div style="background:#fff; border:1px solid #ddd; border-radius: 12px; padding:1.5rem; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
-  <h3 style="color:#004466; margin-bottom:0.5rem;">Digital Egypt Pioneers Initiative (DEPI)</h3>
-  <p style="margin:0; font-size:1.1rem; color:#555;">Specialized training program in Data Analysis</p>
-  <p style="margin-top:0.5rem;">June 2025 – Expected completion December 2025</p>
-</div>
-
-
-  </div>
-</section>
-
-
-  <section id="portfolio">
-    <h2>Projects</h2>
-    <div class="portfolio-item">
-    <a href="https://github.com/Shady-abdallah/Super-Store-Sales-Analysis/blob/be9189530654e75b4f1929f4870d062fb0730b13/Super%20store%20task%20(Final%20Project).xlsb.xlsx" target="_blank" style="text-decoration:none; color:inherit;">
-    <img src="project1.png" alt="Sales Dashboard Preview">
-    <h3>Super Store Sales Data Analysis</h3>
-  </a>
-  <p>Excel dashboard analyzing sales performance with KPIs and charts.</p>
-</div>
-
-    <div class="portfolio-item">
-  <a href="https://github.com/Shady-abdallah/Student-Performance-Analysis.git" target="_blank" style="text-decoration:none; color:inherit;">
-    <img src="project2.png" alt="Student Performance Analysis Dashboard Preview">
-    <h3>Student Performance Analysis</h3>
-  </a>
-  <p>Dashboard analyzing student performance using SQL and Power BI, providing insights into grades, attendance, and overall progress.</p>
-</div>
-
-  </section>
-<section id="skills">
-  <h2 style="text-align:center; margin-bottom: 1.5rem;">Skills</h2>
-  <div style="display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;">
-    
-    <!-- Data Visualization -->
-    <div class="skill-box" style="flex: 1 1 250px; max-width: 300px; background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-      <i class="fas fa-chart-bar" style="font-size: 45px; color: #004466; margin-bottom: 0.5rem;"></i>
-      <h3 style="margin-bottom: 1rem; color:#004466;">Data Visualization</h3>
-      <ul style="list-style: none; padding: 0; margin: 0; font-size: 1.1rem; line-height: 2;">
-        <li>Power BI</li>
-        <li>Tableau</li>
-        <li>Excel Dashboards</li>
-      </ul>
+      <!-- Degree 2 -->
+      <div style="background:#fff; border:1px solid #ddd; border-radius: 12px; padding:1.5rem; box-shadow:0 4px 10px rgba(0,0,0,0.1);" data-aos="fade-left">
+        <h3 style="color:#004466; margin-bottom:0.5rem;">Digital Egypt Pioneers Initiative (DEPI)</h3>
+        <p style="margin:0; font-size:1.1rem; color:#555;">Specialized training program in Data Analysis</p>
+        <p style="margin-top:0.5rem;">June 2025 – Expected completion December 2025</p>
+      </div>
     </div>
-    
-    <!-- Data Analysis -->
-    <div class="skill-box" style="flex: 1 1 250px; max-width: 300px; background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-      <i class="fas fa-database" style="font-size: 45px; color: #004466; margin-bottom: 0.5rem;"></i>
-      <h3 style="margin-bottom: 1rem; color:#004466;">Data Analysis</h3>
-      <ul style="list-style: none; padding: 0; margin: 0; font-size: 1.1rem; line-height: 2;">
-        <li>Advanced Excel</li>
-        <li>SQL</li>
-        <li>Google Sheets</li>
-      </ul>
-    </div>
-    
-    <!-- Language Skills -->
-    <div class="skill-box" style="flex: 1 1 250px; max-width: 300px; background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-      <i class="fas fa-language" style="font-size: 45px; color: #004466; margin-bottom: 0.5rem;"></i>
-      <h3 style="margin-bottom: 1rem; color:#004466;">Language Skills</h3>
-      <ul style="list-style: none; padding: 0; margin: 0; font-size: 1.1rem; line-height: 2;">
-        <li>Arabic – Native</li>
-        <li>English – Intermediate</li>
-      </ul>
-    </div>
-    
-  </div>
-</section>
-
- <section id="contact">
-    <h2>Contact Me</h2>
-      <div style="max-width: 600px; margin: 2rem auto; background: #fff; border: 1px solid #ddd; border-radius: 16px; padding: 2.5rem; box-shadow: 0 6px 18px rgba(0,0,0,0.1);">
-    
-    <h2 style="text-align:center; color:#004466; margin-bottom: 1rem; font-size:1.8rem;">Send me a message</h2>
-    <p style="text-align:center; margin-bottom: 2rem; font-size:1.1rem; color:#555;">I'd love to hear from you! Fill in the form below and I'll get back to you as soon as possible.</p>
-    
-    <form action="https://formspree.io/f/mrbaoopz" method="POST" style="display: flex; flex-direction: column; gap: 1.2rem;">
-      <input type="text" name="name" placeholder="Your Name" required 
-             style="padding: 1rem; border: 1px solid #ccc; border-radius: 10px; font-size:1rem;">
-      
-      <input type="email" name="email" placeholder="Your Email" required 
-             style="padding: 1rem; border: 1px solid #ccc; border-radius: 10px; font-size:1rem;">
-      
-      <input type="text" name="subject" placeholder="Subject" required 
-             style="padding: 1rem; border: 1px solid #ccc; border-radius: 10px; font-size:1rem;">
-      
-      <textarea name="message" placeholder="Your Message" rows="6" required 
-                style="padding: 1rem; border: 1px solid #ccc; border-radius: 10px; font-size:1rem;"></textarea>
-      
-      <button type="submit" 
-              style="padding: 1rem; background:#ed5f00; color:#fff; border:none; border-radius: 10px; font-size: 1.1rem; cursor:pointer; transition: background 0.3s ease;">
-        Send Message
-      </button>
-    </form>
-  </div>
-
-    <p>Or reach me on:</p>
-<div class="footer-icons">
-  <a href="https://www.linkedin.com/in/shady-abdallah05" target="_blank" aria-label="LinkedIn">
-    <i class="fab fa-linkedin"></i>
-  </a>
-  <a href="https://github.com/shady-abdallah" target="_blank" aria-label="GitHub">
-    <i class="fab fa-github"></i>
-  </a>
-  <a href="https://wa.me/+201227273603" target="_blank" aria-label="WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-  <a href="mailto:Shadyabdallah05@gmail.com" target="_blank" aria-label="Gmail">
-  <i class="fas fa-envelope"></i>
-</a>
-</div>
-
   </section>
 
-  <footer>
-    <p>© 2025 All Rights Reserved</p>
+  <section id="portfolio" data-aos="fade-up">
+    <h2 style="text-align:center; margin-bottom: 2rem;" data-aos="fade-down">Projects</h2>
+    
+    <div class="portfolio-item" data-aos="fade-right" data-aos-delay="200">
+      <a href="https://github.com/Shady-abdallah/Super-Store-Sales-Analysis/blob/be9189530654e75b4f1929f4870d062fb0730b13/Super%20store%20task%20(Final%20Project).xlsb.xlsx" target="_blank" style="text-decoration:none; color:inherit;">
+        <img src="project1.png" alt="Sales Dashboard Preview" data-aos="zoom-in" data-aos-delay="400">
+        <h3 data-aos="fade-up" data-aos-delay="600">Super Store Sales Data Analysis</h3>
+      </a>
+      <p data-aos="fade-up" data-aos-delay="800">Excel dashboard analyzing sales performance with KPIs and charts.</p>
+    </div>
+
+    <div class="portfolio-item" data-aos="fade-left" data-aos-delay="400">
+      <a href="https://github.com/Shady-abdallah/Student-Performance-Analysis.git" target="_blank" style="text-decoration:none; color:inherit;">
+        <img src="project2.png" alt="Student Performance Analysis Dashboard Preview" data-aos="zoom-in" data-aos-delay="600">
+        <h3 data-aos="fade-up" data-aos-delay="800">Student Performance Analysis</h3>
+      </a>
+      <p data-aos="fade-up" data-aos-delay="1000">Dashboard analyzing student performance using SQL and Power BI, providing insights into grades, attendance, and overall progress.</p>
+    </div>
+  </section>
+
+  <section id="skills" data-aos="fade-up">
+    <h2 style="text-align:center; margin-bottom: 1.5rem;" data-aos="fade-down">Skills</h2>
+    <div style="display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;">
+      
+      <!-- Data Visualization -->
+      <div class="skill-box" style="flex: 1 1 250px; max-width: 300px; background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" data-aos="flip-left" data-aos-delay="200">
+        <i class="fas fa-chart-bar" style="font-size: 45px; color: #004466; margin-bottom: 0.5rem;"></i>
+        <h3 style="margin-bottom: 1rem; color:#004466;">Data Visualization</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 1.1rem; line-height: 2;">
+          <li>Power BI</li>
+          <li>Tableau</li>
+          <li>Excel Dashboards</li>
+        </ul>
+      </div>
+      
+      <!-- Data Analysis -->
+      <div class="skill-box" style="flex: 1 1 250px; max-width: 300px; background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" data-aos="flip-up" data-aos-delay="400">
+        <i class="fas fa-database" style="font-size: 45px; color: #004466; margin-bottom: 0.5rem;"></i>
+        <h3 style="margin-bottom: 1rem; color:#004466;">Data Analysis</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 1.1rem; line-height: 2;">
+          <li>Advanced Excel</li>
+          <li>SQL</li>
+          <li>Google Sheets</li>
+        </ul>
+      </div>
+      
+      <!-- Language Skills -->
+      <div class="skill-box" style="flex: 1 1 250px; max-width: 300px; background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" data-aos="flip-right" data-aos-delay="600">
+        <i class="fas fa-language" style="font-size: 45px; color: #004466; margin-bottom: 0.5rem;"></i>
+        <h3 style="margin-bottom: 1rem; color:#004466;">Language Skills</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 1.1rem; line-height: 2;">
+          <li>Arabic – Native</li>
+          <li>English – Intermediate</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" data-aos="fade-up">
+    <h2 style="text-align:center; margin-bottom: 1rem;" data-aos="fade-down">Contact Me</h2>
+    <div style="max-width: 600px; margin: 2rem auto; background: #fff; border: 1px solid #ddd; border-radius: 16px; padding: 2.5rem; box-shadow: 0 6px 18px rgba(0,0,0,0.1);" data-aos="zoom-in">
+      <h2 style="text-align:center; color:#004466; margin-bottom: 1rem; font-size:1.8rem;">Send me a message</h2>
+      <p style="text-align:center; margin-bottom: 2rem; font-size:1.1rem; color:#555;">I'd love to hear from you! Fill in the form below and I'll get back to you as soon as possible.</p>
+      
+      <form action="https://formspree.io/f/mrbaoopz" method="POST" style="display: flex; flex-direction: column; gap: 1.2rem;">
+        <input type="text" name="name" placeholder="Your Name" required 
+               style="padding: 1rem; border: 1px solid #ccc; border-radius: 10px; font-size:1rem;" data-aos="fade-right">
+        
+        <input type="email" name="email" placeholder="Your Email" required 
+               style="padding: 1rem; border: 1px solid #ccc; border-radius: 10px; font-size:1rem;" data-aos="fade-left">
+        
+        <input type="text" name="subject" placeholder="Subject" required 
+               style="padding: 1rem; border: 1px solid #ccc; border-radius: 10px; font-size:1rem;" data-aos="fade-right">
+        
+        <textarea name="message" placeholder="Your Message" rows="6" required 
+                  style="padding: 1rem; border: 1px solid #ccc; border-radius: 10px; font-size:1rem;" data-aos="fade-left"></textarea>
+        
+        <button type="submit" 
+                style="padding: 1rem; background:#ed5f00; color:#fff; border:none; border-radius: 10px; font-size: 1.1rem; cursor:pointer; transition: background 0.3s ease;" data-aos="zoom-in">
+          Send Message
+        </button>
+      </form>
+    </div>
+
+    <p style="text-align:center;" data-aos="fade-up">Or reach me on:</p>
+    <div class="footer-icons" data-aos="fade-up" data-aos-delay="200">
+      <a href="https://www.linkedin.com/in/shady-abdallah05" target="_blank" aria-label="LinkedIn" data-aos="zoom-in" data-aos-delay="400">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/shady-abdallah" target="_blank" aria-label="GitHub" data-aos="zoom-in" data-aos-delay="600">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://wa.me/+201227273603" target="_blank" aria-label="WhatsApp" data-aos="zoom-in" data-aos-delay="800">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="mailto:Shadyabdallah05@gmail.com" target="_blank" aria-label="Gmail" data-aos="zoom-in" data-aos-delay="1000">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </div>
+  </section>
+
+  <footer data-aos="fade-up">
+    <p>© 2025 Shady Abdallah | All Rights Reserved</p>
   </footer>
 
-    <!-- Floating WhatsApp button -->
-<a href="https://wa.me/+201227273603" target="_blank" class="whatsapp-float" aria-label="Open WhatsApp chat">
-  <i class="fab fa-whatsapp"></i>
-  <span class="whatsapp-notif" aria-hidden="true">1</span>
-</a>
+  <!-- Floating WhatsApp button -->
+  <a href="https://wa.me/+201227273603" target="_blank" class="whatsapp-float" aria-label="Open WhatsApp chat">
+    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-notif" aria-hidden="true">1</span>
+  </a>
+
+  <!-- AOS JavaScript -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100,
+      delay: 100
+    });
+
+    // Loading screen
+    window.addEventListener('load', function() {
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      setTimeout(() => {
+        loadingOverlay.classList.add('hidden');
+      }, 1000);
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add animation to portfolio items on hover
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px) scale(1.02)';
+      });
+      
+      item.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Form submission with animation
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      
+      submitBtn.textContent = 'Sending...';
+      submitBtn.style.background = '#45a049';
+      
+      setTimeout(() => {
+        submitBtn.textContent = 'Message Sent!';
+        submitBtn.style.background = '#4CAF50';
+        
+        setTimeout(() => {
+          submitBtn.textContent = originalText;
+          submitBtn.style.background = '#ed5f00';
+          this.reset();
+        }, 2000);
+      }, 1500);
+    });
+
+    
+
+    // Animate skill boxes on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.skill-box').forEach(box => {
+      box.style.opacity = '0';
+      box.style.transform = 'translateY(30px)';
+      box.style.transition = 'all 0.6s ease-out';
+      observer.observe(box);
+    });
+
+    // Add typing effect to header text
+    function typeWriter(element, text, speed = 100) {
+      let i = 0;
+      element.innerHTML = '';
+      
+      function type() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+      
+      type();
+    }
+
+    // Apply typing effect to header title
+    const headerTitle = document.querySelector('header h1');
+    const originalTitle = headerTitle.textContent;
+    
+    setTimeout(() => {
+      typeWriter(headerTitle, originalTitle, 80);
+    }, 1000);
+
+    // Add floating animation to WhatsApp button
+    function floatElement(element, duration = 3000) {
+      setInterval(() => {
+        element.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+          element.style.transform = 'translateY(0)';
+        }, duration / 2);
+      }, duration);
+    }
+
+    const whatsappFloat = document.querySelector('.whatsapp-float');
+    floatElement(whatsappFloat, 4000);
+  </script>
+  <!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+    <span class="close-btn">&times;</span>
+    <img class="lightbox-img" id="lightboxImg">
+</div>
+
+<script>
+    const profilePic = document.getElementById("profilePic");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const closeBtn = document.querySelector(".close-btn");
+
+    // عند الضغط على الصورة
+    profilePic.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = "profile.jpg";
+    });
+
+    // إغلاق عند الضغط على زر ×
+    closeBtn.addEventListener("click", () => {
+        lightbox.style.display = "none";
+    });
+
+    // إغلاق عند الضغط على المكان الداكن
+    lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = "none";
+        }
+    });
+</script>
+
 </body>
 </html>
-
-
