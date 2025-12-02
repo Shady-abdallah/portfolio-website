@@ -407,7 +407,6 @@
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
         const submitBtn = this.querySelector('button[type=\"submit\"]');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = '...جاري الإرسال';
